@@ -23,23 +23,21 @@ export default function FormList() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-950 p-6 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-neutral-950 p-6 transition-colors">
       <div className="max-w-5xl mx-auto space-y-4">
-        <h1 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-          Saved Requisition Forms
-        </h1>
+        <h1 className="text-2xl font-semibold text-foreground">Saved Requisition Forms</h1>
 
-        <Card className="p-4 bg-white/70 dark:bg-neutral-900/70 backdrop-blur shadow-sm">
+        <Card className="p-4 bg-white dark:bg-neutral-900 shadow-sm">
           {forms.length === 0 ? (
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-muted-foreground">No forms saved yet.</p>
-              <Button variant="secondary" onClick={() => navigate('/')}>
-                New Form
-              </Button>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+              <div className="text-sm text-muted-foreground">No forms saved yet.</div>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={() => navigate('/')}>New Form</Button>
+              </div>
             </div>
           ) : (
             <Table>
-              <TableCaption>Re-open and re-export any saved requisition.</TableCaption>
+              <TableCaption>Re-open and export any saved requisition.</TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[120px]">Requisition No</TableHead>
@@ -57,7 +55,7 @@ export default function FormList() {
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
                         <Button
-                          variant="outline"
+                          variant="ghost"
                           onClick={() => navigate(`/?id=${f.id}`)}
                           title="Open"
                         >
@@ -67,7 +65,7 @@ export default function FormList() {
                           onClick={() => exportRequisitionPDF(f, 'download')}
                           title="Export PDF"
                         >
-                          Export PDF
+                          Export
                         </Button>
                       </div>
                     </TableCell>

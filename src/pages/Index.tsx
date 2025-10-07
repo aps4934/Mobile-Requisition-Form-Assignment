@@ -154,21 +154,19 @@ export default function RequisitionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-950 p-6 transition-colors">
+    <div className="min-h-screen bg-gray-50 dark:bg-neutral-950 p-6 transition-colors">
       <div className="max-w-5xl mx-auto space-y-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Requisition Form
-          </h1>
+          <h1 className="text-2xl font-semibold text-foreground">Requisition Form</h1>
           <div className="flex gap-2">
-            <Button variant="outline" onClick={onNewForm}>Clear</Button>
+            <Button variant="outline" onClick={onNewForm}>New</Button>
             <Button onClick={onSave}>Save</Button>
-            <Button variant="secondary" onClick={() => onExport(false)}>Export PDF</Button>
-            <Button variant="secondary" onClick={() => onExport(true)}>Share PDF</Button>
+            <Button variant="secondary" onClick={() => onExport(false)}>Export</Button>
+            <Button variant="ghost" onClick={() => onExport(true)}>Share</Button>
           </div>
         </div>
 
-        <Card className="p-4 bg-white/70 dark:bg-neutral-900/70 backdrop-blur space-y-4 shadow-sm">
+        <Card className="p-4 bg-white dark:bg-neutral-900 shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <Label htmlFor="reqNo">Requisition No</Label>
@@ -199,10 +197,10 @@ export default function RequisitionPage() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-medium">Items</h2>
-              <Button onClick={addRow} title="Add Row">Add Row</Button>
+              <Button onClick={addRow} title="Add Row">Add row</Button>
             </div>
             <Table>
-              <TableCaption>Add and remove rows as needed. Required: Item Name, Quantity, Unit, Purpose.</TableCaption>
+              <TableCaption>Required: Item Name, Quantity, Unit, Purpose. Quantity must be &gt; 0.</TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead>Item Name</TableHead>
@@ -263,7 +261,7 @@ export default function RequisitionPage() {
                       />
                     </TableCell>
                     <TableCell>
-                      <Button variant="destructive" onClick={() => removeRow(idx)}>Remove</Button>
+                      <Button variant="destructive" onClick={() => removeRow(idx)} aria-label={`Remove row ${idx + 1}`}>Remove</Button>
                     </TableCell>
                   </TableRow>
                 ))}
